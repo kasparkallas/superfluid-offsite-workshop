@@ -1,11 +1,11 @@
-import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import { createTheme } from '@mui/material/styles'
+import { red } from '@mui/material/colors'
 
 // Create a theme instance.
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#00991F',
     },
     secondary: {
       main: '#19857b',
@@ -14,6 +14,13 @@ const theme = createTheme({
       main: red.A400,
     },
   },
-});
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+  },
+})
 
-export default theme;
+export default theme

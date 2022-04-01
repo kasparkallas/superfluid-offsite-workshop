@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 
-const Home: NextPage = () => {
+const Subgraph: NextPage = () => {
   return (
     <Container maxWidth="lg">
       <Box
@@ -15,10 +15,10 @@ const Home: NextPage = () => {
           alignItems: 'center',
         }}
       >
-        Workshop
+        Subgraph
       </Box>
     </Container>
   )
 }
 
-export default Home
+export default Subgraph
