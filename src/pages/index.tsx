@@ -31,6 +31,12 @@ const Home: NextPage = () => {
         >
           rtk-query docs
         </a>
+        <a href="https://mui.com/getting-started/installation/" target="_blank">
+          MUI docs
+        </a>
+        <a href="https://nextjs.org/docs/getting-started" target="_blank">
+          Next.js docs
+        </a>
       </Box>
     </Container>
   )
