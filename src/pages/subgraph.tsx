@@ -26,6 +26,14 @@ const Subgraph: NextPage = () => {
       : skipToken
   )
 
+  console.log({
+    chainId: network.chainId,
+    walletAddress,
+    isFetching: accountTokenSnapshotsQuery.isFetching,
+    isLoading: accountTokenSnapshotsQuery.isLoading,
+    data: accountTokenSnapshotsQuery.data,
+  })
+
   return (
     <Container maxWidth="lg">
       <Box
