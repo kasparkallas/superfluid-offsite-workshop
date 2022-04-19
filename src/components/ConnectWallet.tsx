@@ -1,39 +1,40 @@
-import { Button } from '@mui/material'
-import { ethers } from 'ethers'
-import { FC, ReactElement, ReactNode } from 'react'
-import Web3Modal from 'web3modal'
+import { Button, Stack, Typography } from '@mui/material'
+import { FC, useMemo } from 'react'
 import { useNetworkContext } from '../contexts/NetworkContext'
 import { useWalletContext } from '../contexts/WalletContext'
 
 const ConnectWallet: FC = () => {
-  const { network, setNetwork } = useNetworkContext()
-  const {
-    walletChainId: chainId,
-    walletProvider: provider,
-    setProvider,
-  } = useWalletContext()
+  const { network } = useNetworkContext()
+  const { walletAddress, walletChainId, walletProvider, connect } =
+    useWalletContext()
 
-  const onClick = async () => {
-    const providerOptions = {}
-
-    const web3Modal = new Web3Modal({
-      cacheProvider: true,
-      providerOptions,
-    })
-
-    const web3Provider = await web3Modal.connect()
-
-    setProvider(web3Provider)
-  }
+  const shortenedAddress = useMemo(
+    () => (walletAddress ? shortenAddress(walletAddress) : ''),
+    [walletAddress]
+  )
 
   return (
     <>
-      {provider ? (
-        <Button variant="outlined" disabled>
-          {network.chainId !== chainId ? 'Wrong network' : 'Connected'}
+      {walletProvider ? (
+        <Button
+          variant="outlined"
+          color={network.chainId !== walletChainId ? 'error' : 'primary'}
+          sx={{
+            pointerEvents: 'none',
+            cursor: 'default',
+          }}
+        >
+          <Stack>
+            <Typography variant="body2">
+              {network.chainId !== walletChainId
+                ? 'Wrong network'
+                : 'Connected'}
+            </Typography>
+            <Typography variant="body2">{shortenedAddress}</Typography>
+          </Stack>
         </Button>
       ) : (
-        <Button variant="outlined" onClick={onClick}>
+        <Button variant="outlined" onClick={connect}>
           Connect
         </Button>
       )}
@@ -42,3 +43,10 @@ const ConnectWallet: FC = () => {
 }
 
 export default ConnectWallet
+
+function shortenAddress(address: string, length = 4) {
+  return `${address.substring(0, 2 + length)}...${address.substring(
+    address.length - length,
+    address.length
+  )}`
+}
